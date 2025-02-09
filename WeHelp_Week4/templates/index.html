@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首頁</title>
+    <link href="{{ url_for('static', path='style.css') }}" rel="stylesheet">
+    <!-- <link href="{{ url_for('static', path='style.css') }}" rel="stylesheet"> -->
+</head>
+<body>
+    <div class="header">
+        <div class = "title"> 歡迎光臨，請輸入帳號密碼 </div>
+    </div>
+    
+    <div style="text-align: center; font-size: 24px; margin: 20px 0px;">登入系統</div>
+
+    <form class="loginForm" action = "/signin" method="post">
+        <div style="margin-bottom: 20px;">
+            <span>帳號</span>
+            <input type="text" name="member"/>    
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <span>密碼</span>
+            <input type="password" name="password"/>
+        </div>
+        
+
+        <span style="margin-bottom: 20px;">同意條款<input class="okCheckbox" type="checkbox"/></span> 
+       
+        <button>登入</button>
+
+    </form>
+    <script>
+        // 選擇第一個.loginForm class名稱的第一個元素 對應的全選querySelectorAll()全部有該名稱的元素
+        let loginForm = document.querySelector(".loginForm")
+        loginForm.addEventListener("submit", function(event) {
+            //選擇第一個.okCheckbox class名稱的元素
+            let checkbox = document.querySelector(".okCheckbox");
+
+            if (!checkbox.checked) {
+                alert("請先勾選同意條款");
+                // 防止表單提交到後端那，也就是說跳出警告視窗外
+                event.preventDefault();
+            }
+        });
+    </script>
+    
+    <!-- 待完成 -->
+    <!-- <hr>
+    <div class="square">紀錄正整數的平方</div>
+    <div><span>正整數<input type="number"></span></div>
+    <button>計算</button> -->
+
+</body>
+</html>

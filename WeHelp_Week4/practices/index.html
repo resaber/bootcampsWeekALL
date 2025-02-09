@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML 網頁</title>
+</head>
+<body>
+    <!-- Fetch非常好用！！ -->
+    <h2>使用Fetch測試不同的連線方法</h2>
+    <!-- 預設是GET方法 -->
+    <!-- <a href="/data">測試</a> -->
+     <button onclick="connectGET();">GET連線</button>
+     <button onclick="connectPOST();">POST連線</button>
+     <button onclick="addPOST();">POST連線加法</button>
+     <script>
+        async function connectGET(){
+            let response = await fetch("/data",{method:"GET"});
+            let data = await response.json();
+            console.log(data);
+        }
+        async function connectPOST(){
+            let response = await fetch("/data",{
+            method:"POST",
+            // 請求文本由前端傳送到後端body可以傳送純字串或是JSON格式
+            //JSON對前端是物件對後端來說是字典
+            // body:"我是誰",
+            //stringfy是JS工具把JSON形式的資料轉換成字串傳遞到後端
+            //所以到後端又必須把字串轉換成字典
+            body:JSON.stringify({"x":1})
+        });
+            let data = await response.json();
+            console.log(data);
+        }
+        async function addPOST(){
+            let response = await fetch("/add",{
+            method:"POST",
+            // 請求文本由前端傳送到後端body可以傳送純字串或是JSON格式
+            //JSON對前端是物件對後端來說是字典
+            // body:"我是誰",
+            //stringfy是JS工具把JSON形式的資料轉換成字串傳遞到後端
+            //所以到後端又必須把字串轉換成字典
+            body:JSON.stringify({"n1":5,"n2":7})
+        });
+            let data = await response.json();
+            console.log(data);
+        }
+     </script>
+
+    <h2>提供計算平方的功能</h2>
+    <!-- form表單連線到/square網址 -->
+    <form action="/square">
+        <!-- 放置一個單行輸入匡  name="num" ""內的名稱要和後端函式的參數 名稱一樣-->
+        請輸入一個整數 <input type="text" name="num"/>
+        <button>計算</button>
+    </form>
+    <!-- form表單連線到/multiply網址 -->
+    <form action="/multiply">
+        <!-- 放置一個單行輸入匡  name="n1 or n2" ""內的名稱要和後端函式的參數 名稱一樣-->
+        請輸入整數一<input type="text" name="n1"/><br/>
+        請輸入整數二<input type="text" name="n2"/><br>
+        <button>計算</button>
+    </form>
+    
+</body>
+</html>
