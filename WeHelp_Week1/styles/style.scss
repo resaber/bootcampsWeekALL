@@ -1,0 +1,207 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  height: 100%;
+}
+.burger {
+  display: none;
+  width: 2em;
+  height: 2em;
+}
+.MenuItems-buttonMode {
+  background-color: rgb(255, 255, 255);
+  display: none;
+  position: fixed;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 10;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.x {
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+// .MenuItems-buttonMode > .item {
+//   margin-bottom: 20px;
+// }
+
+nav {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  margin: 20px 0;
+}
+.titleWeb {
+  margin-left: 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+.MenuItems {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+.item {
+  margin-right: 20px;
+}
+.welcome {
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(194, 248, 248);
+  margin-bottom: 20px;
+}
+main {
+  width: 1200px;
+  margin: auto;
+}
+.Promotionall {
+  display: flex;
+  // height: 50px;
+  //調整子元素間距
+  //原本會因為子元素右邊的margin造成右邊空白空間較少
+  //讓子元素水平置中，讓左右兩邊等空間
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.promotion {
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  flex: 0 0 calc(33.33% - 20px);
+  background-color: rgb(194, 248, 248);
+  height: 50px;
+}
+.textp {
+  text-align: center;
+}
+.promotionImg {
+  width: 80px;
+  height: 50px;
+}
+.images {
+  display: flex;
+  //原本會因為子元素右邊的margin造成右邊空白空間較少
+  //讓子元素水平置中，讓左右兩邊等空間
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.images > div:nth-child(1),
+.images > div:nth-child(6) {
+  flex: 0 0 calc(33.33% - 20px);
+  //flex行高 其中的子元素讓其他子元素跟隨其高度，stretch觀念 統一每個image高度為200px
+  height: 200px;
+  border: 1px solid black;
+  background-image: url("../images/example2.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.images > div {
+  //不是同個層級div:nth-child 如果只在上面設置height高度，不會套用在其他1和6以外的元素
+  height: 200px;
+  border: 1px solid black;
+  flex: 0 0 calc(66.67% / 4 - 20px);
+  background-image: url("../images/example2.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.title {
+  // border: 1px solid black;
+  background-color: rgba($color: #807f7f, $alpha: 0.3);
+  position: relative;
+  text-align: center;
+  margin: auto;
+  padding: 5px;
+  top: calc(100% - 35.5px);
+}
+.images > div > img {
+  position: relative;
+  left: calc(100% - 25px);
+  top: -33px;
+}
+@media screen and (max-width: 1200px) and (min-width: 601px) {
+  main {
+    width: 90%;
+  }
+
+  .Promotionall {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .promotion {
+    flex: 0 0 calc(50% - 20px);
+  }
+  .Promotionall > div:nth-child(3) {
+    flex: 0 0 calc(100% - 20px);
+  }
+
+  //flexbox div偽類即使從新設定也蓋不掉之前寫的設定
+  .images > div:nth-child(1),
+  .images > div:nth-child(6) {
+    flex: 0 0 calc(100% / 4 - 20px);
+    background-image: url("../images/example2.jpg");
+  }
+  .images > div {
+    flex: 0 0 calc(100% / 4 - 20px);
+    background-image: url("../images/example2.jpg");
+  }
+
+  .images > div:nth-child(9),
+  .images > div:nth-child(10) {
+    flex: 0 0 calc(50% - 20px);
+    background-image: url("../images/example2.jpg");
+  }
+}
+//px360~600
+@media screen and (max-width: 600px) and (min-width: 361px) {
+  main {
+    width: 90%;
+  }
+  .burger {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    margin-right: 20px;
+  }
+  .titleWeb {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .MenuItems-buttonMode {
+    display: none;
+  }
+  .MenuItems {
+    display: none;
+  }
+
+  .Promotionall {
+    flex-wrap: wrap;
+  }
+  .promotion {
+    flex: 0 0 100%;
+  }
+  .images > div:nth-child(1),
+  .images > div:nth-child(6),
+  .images > div:nth-child(9),
+  .images > div:nth-child(10) {
+    flex: 0 0 100%;
+  }
+  .images > div {
+    flex: 0 0 100%;
+  }
+}

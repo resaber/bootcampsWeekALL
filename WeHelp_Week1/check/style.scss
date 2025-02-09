@@ -1,0 +1,164 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 20px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.title {
+  text-align: left;
+}
+
+.MenuItems {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.welcome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  background-color: rgb(175, 232, 232);
+}
+
+.welcome .text h1 {
+  font-size: 2rem; // 兩倍基準字體大小
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.PromotionAll {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.promotion {
+  display: flex;
+  align-items: center;
+  width: 33%;
+  height: 50px;
+  background-color: lightgray;
+}
+
+.promotion img {
+  width: 80px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.promotion p {
+  margin-left: 10px;
+}
+
+.images1 {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.img1 {
+  flex: 2;
+  margin: 10px;
+}
+
+.img2-5 {
+  flex: 1;
+  margin: 10px;
+}
+
+@media screen and (min-width: 1200px) {
+  .PromotionAll {
+    width: 100%;
+  }
+
+  .promotion {
+    width: 33%;
+  }
+
+  .img1 {
+    flex: 2;
+  }
+
+  .img2-5 {
+    flex: 1;
+  }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 600px) {
+  main {
+    width: 90%;
+  }
+
+  .PromotionAll {
+    flex-wrap: wrap;
+  }
+
+  .promotion:nth-of-type(1),
+  .promotion:nth-of-type(2) {
+    width: 50%;
+  }
+
+  .promotion:nth-of-type(3) {
+    width: 100%;
+  }
+
+  .img1 {
+    flex: 2;
+  }
+
+  .img2-5 {
+    flex: 1;
+  }
+}
+//600px內
+@media screen and (max-width: 600px) {
+  .MenuItems {
+    display: none;
+  }
+
+  .burger-menu {
+    display: block;
+  }
+
+  main {
+    width: 90%;
+  }
+
+  .PromotionAll {
+    flex-direction: column;
+  }
+
+  .promotion {
+    width: 100%;
+  }
+
+  .images1 {
+    flex-direction: column;
+  }
+
+  .img1,
+  .img2-5 {
+    width: 100%;
+  }
+}

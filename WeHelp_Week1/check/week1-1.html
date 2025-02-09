@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <title>WeHelp Week 1 Assignment</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <div class="title">
+          <li>My Website</li>
+        </div>
+        <div class="MenuItems">
+          <li>Item1</li>
+          <li>Item2</li>
+          <li>Item3</li>
+          <li>Item4</li>
+        </div>
+      </ul>
+    </nav>
+    <section class="welcome">
+      <div class="text">
+        <h1>Welcome to MyHome</h1>
+      </div>
+    </section>
+    <main>
+      <section class="mainArea">
+        <div class="PromotionAll">
+          <div class="promotion">
+            <img src="./images/coldstone.jpg" alt="coldstone" />
+            <p>Promotion1</p>
+          </div>
+          <div class="promotion">
+            <img src="./images/coldstone.jpg" alt="coldstone" />
+            <p>Promotion2</p>
+          </div>
+          <div class="promotion">
+            <img src="./images/coldstone.jpg" alt="coldstone" />
+            <p>Promotion3</p>
+          </div>
+        </div>
+        <div class="images1">
+          <img src="../images/example.jpg" alt="Image 1" class="img1" />
+          <img src="../images/example.jpg" alt="Image 2" class="img2-5" />
+          <img src="../images/example.jpg " alt="Image 3" class="img2-5" />
+          <img src="../images/example.jpg" alt="Image 4" class="img2-5" />
+          <img src="../images/example.jpg" alt="Image 5" class="img2-5" />
+        </div>
+      </section>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const burgerMenu = document.querySelector(".burger-menu");
+        const menuItems = document.querySelector(".MenuItems");
+
+        burgerMenu.addEventListener("click", function () {
+          menuItems.classList.toggle("active");
+        });
+      });
+    </script>
+  </body>
+</html>
