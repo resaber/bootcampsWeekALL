@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function findAndPrint(messages, currentStation) {
+        // your code here
+        //程式邏輯先寫好，支線可能要拉出來另外寫，依照第二個參數位置去對應訊息中距離最近的那個人
+        //step1先給每個站點獨立的index findAndPrint站點索引-每人所在的站點索引，加上絕對值，五個人所以有五個值互相比較
+        //將最小值的那個人印出
+        const greenLine = {
+          "Songshan": 0,
+          "Nanjing Sanmin": 1,
+          "Taipei Arena": 2,
+          "Nanjing Fuxing": 3,
+          "Songjiang Nanjing": 4,
+          "Zhongshan": 5,
+          "Beimen": 6,
+          "Ximen": 7,
+          "Xiaonanmen": 8,
+          "Chiang Kai-Shek Memorial Hall": 9,
+          "Guting": 10,
+          "Taipower Building": 11,
+          "Gongguan": 12,
+          "Wanlong": 13,
+          "Jingmei": 14,
+          "Dapinglin": 15,
+          "Qizhang": 16,
+          "Xindian City Hall": 17,
+          "Xindian": 18,
+        };
+
+        const restLine = { "Qizhang": 0 , "Xiaobitan station" :1}
+        
+        let dic_Newstations = {};
+        //把字典裡面的關鍵字抓出來儲存在dic_NewStations
+        // Object.entries(messages)會將messages以key-value pair回傳
+        for (const [x, y] of Object.entries(messages)) {
+          //檢查greenLine和restLine的key有沒有在station裡面 要運用到其餘運算時要用到大括號
+          for (const station of Object.keys({...greenLine ,...restLine})){
+            if(y.includes(station)){
+              //.是單向，比如dic_Newstations.x，是下面新增一個變數x(key)
+              //[]是儲存給的key對象比如前面[x]key內容是bob則我們接收的就是bob 等號右邊則是賦予新的value值
+              dic_Newstations[x] = station;
+            }
+          } 
+        }
+        // console.log(dic_Newstations);
+
+        //step2
+        //1 都在綠  正常加減
+        //2 都不在綠 =1
+        //3 我在綠人在小碧潭 我的位置(?)到七張(16)距離  加上七張(0)到小碧潭的距離(1)
+        //4 我在小碧潭人在綠 我的位置小碧潭(1)到七張(0) 再加上七張(0)到那人所在的位置的距離(?)
+        //先抓出dic_Newstationsk的key-value
+        //第二步檢查currentStation和每一個人對應的value在哪條線上
+        //依照四種情況把currentStation的索引減去對應的人的在線上的value索引取絕對值
+        let distances_5 = {};
+        for(const [name, personStation] of Object.entries(dic_Newstations)){
+          //先把各自的索引抓出來
+          //currentStation : index  personStation : index  5組距離值互相比較，抓最小距離對應的人印出
+          if(currentStation in greenLine && personStation in greenLine){
+            distances_5[name] = Math.abs(greenLine[currentStation] - greenLine[personStation])
+
+          }else if(currentStation in restLine && personStation in restLine){
+            distances_5[name] = Math.abs(restLine[currentStation] - restLine[personStation])
+
+          }else if(currentStation in greenLine && personStation in restLine){
+            distances_5[name] = Math.abs(greenLine[currentStation]- greenLine["Qizhang"]) + 
+            restLine[personStation]
+
+          }else if(currentStation in restLine && personStation in greenLine){
+            distances_5[name] = Math.abs(restLine[currentStation] - restLine["Qizhang"]) +
+            Math.abs(greenLine['Qizhang'] - greenLine[personStation])
+          }
+        }
+        
+        //先抓出最小的值distance_5的value 再將distance_5的key(人名)印出
+        // console.log(Math.min([0,1,2,3,4,5]));//錯誤寫法
+        // console.log(Math.min(...[0,1,2,3,4,5]));//正確寫法
+
+        //其餘運算-會將陣列中的每個子元素，每個獨立展開 (Math.min)或是有用到運算作用的 不能處理單獨一整組的元素列表)
+        //所以必須在Object或是陣列前面寫...，讓該陣列或是列表可以做運算，
+        //他會將一整串列表中的子元素獨立分割，例如{1,2,3,4,5}=> {1} {2} {3} {4} {5}
+        
+        let minNumber = (Math.min(...Object.values(distances_5)));
+        
+        
+        key = null;
+        for(let k in distances_5){
+          if(distances_5[k] === minNumber){
+            key = k;
+            break;
+          }
+        }
+        console.log(key);
+
+
+
+      }
+    
+
+
+      const messages = {
+        Bob: "I'm at Ximen MRT station.",
+        Mary: "I have a drink near Jingmei MRT station.",
+        Copper: "I just saw a concert at Taipei Arena.",
+        Leslie: "I'm at home near Xiaobitan station.",
+        Vivian: "I'm at Xindian station waiting for you.",
+      };
+      console.log("hw1")
+      findAndPrint(messages, "Wanlong"); // print Mary
+      findAndPrint(messages, "Songshan"); // print Copper
+      findAndPrint(messages, "Qizhang"); // print Leslie
+      findAndPrint(messages, "Ximen"); // print Bob
+      findAndPrint(messages, "Xindian City Hall"); // print Vivian
+      console.log("-------------------------------")
+    </script>
+      
+    <script>
+        function book(consultants, hour, duration, criteria) {
+        // 確保預訂紀錄只在第一次執行時建立
+        if (!book.schedule) {
+            book.schedule = {};
+            consultants.forEach(c => book.schedule[c.name] = []);
+        }
+
+        // 根據 criteria 進行排序
+        if (criteria === "price") {
+            consultants.sort((a, b) => a.price - b.price); // 按價格從低到高排序
+        } else if (criteria === "rate") {
+            consultants.sort((a, b) => b.rate - a.rate); // 按評價從高到低排序
+        }
+
+        // 遍歷排序後的顧問列表，找到第一個可用的顧問
+        for (let consultant of consultants) {
+            let name = consultant.name;
+            let bookedTimes = book.schedule[name];
+            let newTimeRange = Array.from({ length: duration }, (_, i) => hour + i);
+
+            // 檢查時間是否有衝突
+            if (newTimeRange.every(time => !bookedTimes.includes(time))) {
+                // 預訂成功，更新顧問的預訂時間
+                book.schedule[name].push(...newTimeRange);
+                console.log(name);
+                return;
+            }
+        }
+
+        // 若無可用顧問，輸出 "No Service"
+        console.log("No Service");
+    }
+
+      // 測試案例
+      const consultants = [
+          { "name": "John", "rate": 4.5, "price": 1000 },
+          { "name": "Bob", "rate": 3, "price": 1200 },
+          { "name": "Jenny", "rate": 3.8, "price": 800 }
+      ];
+
+      // 測試函式
+      console.log("hw2")
+      book(consultants, 15, 1, "price"); // Jenny
+      book(consultants, 11, 2, "price"); // Jenny
+      book(consultants, 10, 2, "price"); // John
+      book(consultants, 20, 2, "rate"); // John
+      book(consultants, 11, 1, "rate"); // Bob
+      book(consultants, 11, 2, "rate"); // No Service
+      book(consultants, 14, 3, "price"); // John
+      console.log("-------------------------------")
+      </script>
+
+      <script>
+        function func(...data) {
+          // Step 1: 初始化中間名字的陣列
+          let middleName = [];
+
+          // Step 2: 用迴圈抓出每個名字的中間名
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].length === 2 || data[i].length === 3) {
+              middleName.push(data[i].slice(1, 2));  // 取 index 1
+            } else if (data[i].length === 4 || data[i].length === 5) {
+              middleName.push(data[i].slice(2, 3));  // 取 index 2
+            }
+          }
+
+          // Step 3: 找出只出現一次的中間名
+          let uniqueNames = [];  // 儲存結果
+          for (let i = 0; i < middleName.length; i++) {
+            // 計算 middleName[i] 在 middleName 陣列中出現的次數
+            let count = middleName.filter((name) => name === middleName[i]).length;
+
+            if (count === 1) {
+              // 只出現一次的中間名，將對應的 full name 存入 uniqueNames
+              uniqueNames.push(data[i]);
+            }
+          }
+
+          // Step 4: 根據結果打印
+          if (uniqueNames.length > 0) {
+            console.log(uniqueNames);  // 印出符合條件的名字
+          } else {
+            console.log("沒有");  // 若無符合條件的名字，輸出 "沒有"
+          }
+        }
+
+        // 測試用例
+        console.log("hw3")
+        func("彭大牆", "陳王明雅", "吳明"); // print 彭大牆
+        func("郭靜雅", "王立強", "郭林靜宜", "郭立恆", "林花花"); // print 林花花
+        func("郭宣雅", "林靜宜", "郭宣恆", "林靜花"); // sprint 沒有
+        func("郭宣雅", "夏曼藍波安", "郭宣恆"); // print 夏曼藍波安
+        console.log("-------------------------------")
+      </script>
+
+      <script>
+        function getNumber(index) {
+          // your code here
+          //0,1,4,7,11
+          if (index == 0) {
+            console.log(0);
+            return;
+          }
+
+          //index為3的倍數時 為前一項的值-1
+          let result = 0;
+          for (let i = 1; i <= index; i++) {
+            if (i % 3 === 0) {
+              result -= 1;
+            } else {
+              result += 4;
+            }
+          }
+          console.log(result);
+        }
+        console.log("hw4")
+        getNumber(0); // print 0
+        getNumber(1); // print 4
+        getNumber(5); // print 15
+        getNumber(10); //print 25
+        getNumber(30); // print 70
+      </script>
+  </body>
+</html>
