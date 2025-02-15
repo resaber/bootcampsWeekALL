@@ -134,7 +134,7 @@ def func(*data):
         # print(i, middle_name) #也等於print(list(enumerate(name_list)))
         #name_list.count(middle_name) 是全局的檢查：
         #它不在意目前是在哪個索引（i），而是直接遍歷整個列表，找出所有與 middle_name 相同的元素，並返回總次數。
-        count = name_list.count(middle_name);
+        count = name_list.count(middle_name)
         if(count == 1): #在只出現一次的情況下把它儲存下來
             middleName_index.append(i)
     
@@ -147,12 +147,12 @@ def func(*data):
         for indexValue in middleName_index:
             #把data[對應的索引標籤序號]的值印出來，儲存在resultArray[]
             resultArray.append(data[indexValue])
-        print(resultArray)
+        print(" - ".join( resultArray)) #會印出沒有[]的資料
     else:
         print("沒有")
 
 
-# func("彭大牆", "陳王明雅", "吳明", "韓國瑜"); # print 彭大牆"韓國瑜"
+# func("彭大牆", "陳王明雅", "吳明", "韓國瑜") # print 彭大牆"韓國瑜"
 func("彭大牆", "陳王明雅", "吳明") # print 彭大牆
 func("郭靜雅", "王立強", "郭林靜宜", "郭立恆", "林花花") # print 林花花 
 func("郭宣雅", "林靜宜", "郭宣恆", "林靜花") # print 沒有 
